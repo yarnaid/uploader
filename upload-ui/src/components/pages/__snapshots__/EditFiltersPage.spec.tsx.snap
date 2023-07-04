@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditFiltersPage renders 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <button
+      class="btn btn-warning btn-sm"
+      type="button"
+    >
+      New Filter(!)
+    </button>
+    <div />
+  </div>
+</DocumentFragment>
+`;

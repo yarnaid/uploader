@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTag renders 1`] = `
+<DocumentFragment>
+  <button
+    class="btn btn-success btn-sm"
+    type="button"
+  >
+    +
+  </button>
+</DocumentFragment>
+`;
