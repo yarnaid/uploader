@@ -23,10 +23,20 @@
   "include": [
     "src"
   ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "lib"
+  ],
   "baseUrl": "src",
   "paths": {
     "test-utils": [
       "./test-utils"
     ]
-  }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
