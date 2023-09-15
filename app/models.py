@@ -4,20 +4,18 @@ from datetime import datetime
 
 
 class Filter(BaseModel, frozen=True):
-    name: str = Field(..., example="year", description="The name of the filter.")
-    values: list[str] = Field(..., example=["2020", "2021"], description="The values of the filter.")
+    name: str = Field(..., description="The name of the filter.")
+    values: list[str] = Field(..., description="The values of the filter.")
 
 
 class FileMetadata(BaseModel):
-    name: Optional[str]
-    size: Optional[int]
-    url: Optional[str]
-    source: Optional[str]
-    type_: Optional[str]
-    created: Optional[datetime]
-    updated: Optional[datetime]
-    tags: Optional[list[Filter]]
+    name: Optional[str] = Field(None)
+    size: Optional[int] = Field(None)
+    type_: Optional[str] = Field(None)
+    created_at: Optional[datetime] = Field(None)
+    updated_at: Optional[datetime] = Field(None)
+    tags: Optional[list[Filter]] = Field(None)
 
 
 class FilterValue(BaseModel):
-    value: str = Field(..., example="2020", description="The value of the filter.")
+    value: str = Field(..., description="The value of the filter.")

@@ -1,41 +1,27 @@
-export type FileType = {
-  name: string;
-  size: number;
-  type?: string;
-  updated?: Date;
-  created?: Date;
-  url: string;
-};
+import * as z from "zod";
 
-export type FilterType = {
-  name: string;
-  values: string[];
-};
+export const filterSchema = z.object({
+  name: z.string(),
+  values: z.array(z.string()),
+});
+export const filtersSchema = z.array(filterSchema);
 
-export const isFilterType = (obj: any): obj is FilterType => {
-  return obj && obj.name && obj.values;
-};
+export type FilterType = z.infer<typeof filterSchema>;
+export type FiltersType = z.infer<typeof filtersSchema>;
 
-export type FileMetadataType = {
-  name?: string;
-  size?: number;
-  type?: string;
-  url?: string;
-  source?: string;
-  created?: string;
-  updated?: string;
-  tags: FilterType[];
-};
+export const fileMetadataSchema = z.object({
+  name: z.string().nullable().optional(),
+  type_: z.string().nullable().optional(),
+  size: z.number().nullable().optional(),
+  created_at: z.string().nullable().optional(),
+  updated_at: z.string().nullable().optional(),
+  tags: z.array(filterSchema).nullable().optional(),
+  file: z.string().nullable().optional(),
+});
 
-export const isFileMetadataType = (obj: any): obj is FileMetadataType => {
-  return obj && obj.tags;
-};
+export type FileMetadataType = z.infer<typeof fileMetadataSchema>;
 
-export type UploadFileType = {
-  file: File | null;
-  metadata: FileMetadataType | null;
-};
-
-export const isUploadFileType = (obj: any): obj is UploadFileType => {
-  return obj && obj.file && obj.metadata;
+export type UploadFileRequest = {
+  file?: File;
+  raw_metadata?: string;
 };
