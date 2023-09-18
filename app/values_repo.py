@@ -19,7 +19,6 @@ class ValuesRepo:
             self._values = []
         with open(self._storage_path, "rb") as f:
             lines = f.readlines()
-            print(lines)
             self._values = list({s.decode().strip() for s in lines})
 
     def values(self) -> list[str]:

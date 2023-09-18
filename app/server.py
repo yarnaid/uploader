@@ -7,6 +7,7 @@ from .models import Filter, FileMetadata, FilterValue
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 import logging
+from datetime import datetime
 
 
 app = FastAPI()
@@ -96,5 +97,8 @@ async def update_file_metadata(
     raw_metadata: Annotated[str, Form()],
 ):
     metadata = FileMetadata.parse_raw(raw_metadata)
-    STORAGE.update_file_metadata(metadata)
+    assert metadata.name is not None
+    metadata_stored = STORAGE.load_file_meta(metadata.name)
+    updated_metadata = metadata_stored.model_copy(update=metadata.model_dump(exclude_unset=True))
+    STORAGE.update_file_metadata(updated_metadata)
     return {"metadata": metadata}

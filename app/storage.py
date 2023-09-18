@@ -2,6 +2,7 @@ from pathlib import Path
 from fastapi import UploadFile
 from .models import FileMetadata
 from werkzeug.utils import secure_filename
+from datetime import datetime
 
 ROOT = Path(__file__).parent
 METADATA_EXTENSION = "json"
@@ -27,7 +28,9 @@ class Storage:
         file.filename = secure_filename(file.filename)
         with open(Storage.STORAGE_ROOT / file.filename, "wb") as buffer:
             buffer.write(file.file.read())
-        secure_metadata = metadata.copy(update={"name": file.filename})
+        secure_metadata = metadata.model_copy(update={"name": file.filename})
+        secure_metadata.created_at = datetime.utcnow()
+        secure_metadata.updated_at = datetime.utcnow()
         with open(Storage.STORAGE_ROOT / f"{file.filename}.{METADATA_EXTENSION}", "w", encoding="utf8") as buffer:
             buffer.write(secure_metadata.json())
 
@@ -43,5 +46,6 @@ class Storage:
         assert metadata.name is not None
         safe_filename = secure_filename(metadata.name)
         file_path = Storage.STORAGE_ROOT / (safe_filename + f".{METADATA_EXTENSION}")
+        metadata.updated_at = datetime.utcnow()
         with open(file_path, "w", encoding="utf8") as buffer:
             buffer.write(metadata.json())
