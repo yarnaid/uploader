@@ -26,8 +26,8 @@ export const NavBar = () => {
   return (
     <>
       <div className="flex flex-row gap-2">
-        <ArrowUpTrayIcon className="h-6 w-6" />
-        <span className="text-2xl">Upload!</span>
+        {/*<ArrowUpTrayIcon className="h-6 w-6" />*/}
+        <span className="text-2xl">Upload&nbsp;Tool</span>
         <form className="flex w-full" onSubmit={onSearchSubmit}>
           <Input
             type="text"

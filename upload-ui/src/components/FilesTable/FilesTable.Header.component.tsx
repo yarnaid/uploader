@@ -18,7 +18,7 @@ export const FilesTableHeader = (props: {
       <TableHeader>
         <TableRow className="bg-secondary">
           <TableHead>Filename</TableHead>
-          <TableHead className="text-right">Created</TableHead>
+          <TableHead className="text-right">Uploaded</TableHead>
           <TableHead className="text-right">Updated</TableHead>
           <TableHead className="flex flex-row items-center justify-between text-left">
             File type
